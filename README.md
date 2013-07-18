@@ -28,6 +28,10 @@ Screenshots
 
 There are a lot of these, so hang tight.
 
+![The front page.](https://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-0.png)
+
+This is the front page. The cloud icon is the default header, but you can choose any image (I recommend a simple white sprite) using WordPress's built-in custom headers feature. This screenshot also shows the navigation menu in action. A smaller version of the header is shown on post pages.
+
 ![Some pictures of water and bridges with a sidebar on the right.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-2.png)
 
 This photo layout was created using the built-in [WordPress Gallery feature](http://codex.wordpress.org/The_WordPress_Gallery). This example is laid out in a 3-column grid.
