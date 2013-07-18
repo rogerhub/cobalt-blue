@@ -1,0 +1,95 @@
+html
+  background: $blue2
+  color: $white
+  font: 400 1em $sans-serif
+  padding: 0 25px 25px 25px
+  word-wrap: break-word
+a
+  color: inherit
+  &:focus
+    text-decoration: none
+    +vendor-prefix(border-radius, 2px)
+    +vendor-prefix(box-shadow, 0 0 0 1px rgba(255, 255, 255, 0.8))
+.clear-fix
+  clear: both
+
+.text
+  border: 1px solid $blue9
+  padding: 4px
+  vertical-align: middle
+  &:focus
+    outline: 1px solid $blue8
+    outline-offset: 0
+.button
+  background-color: $blue1
+  border: none
+  color: $white
+  cursor: pointer
+  font: 300 1em/1.25 $sans-serif
+  padding: 4px 9px
+  text-align: center
+  text-decoration: none
+  vertical-align: middle
+  +vendor-prefix(border-radius, 0.25em)
+  $transition: background 0.3s, color 0.1s
+  +vendor-prefix(transition, $transition)
+  &:hover
+    background-color: $blue8
+    color: $blue3
+
+/* =WordPress Core
+
+.aligncenter, div.aligncenter
+  display: block
+  margin: 5px auto 5px auto
+
+.alignright
+  float: right
+
+.alignleft 
+  float: left
+
+.wp-caption
+  background: #fff
+  border: 1px solid #f0f0f0
+  /* Image does not overflow the content area
+  max-width: 96%
+  padding: 5px 3px 10px
+  text-align: center
+  &.alignnone
+    margin: $shifted_spacing $base_spacing $base_spacing 0
+  &.alignleft
+    margin: $shifted_spacing $base_spacing $base_spacing 0
+  &.alignright
+    margin: $shifted_spacing 0 $base_spacing $base_spacing
+  &.aligncenter
+    margin: $shifted_spacing auto $base_spacing auto
+  img
+    border: 0 none
+    height: auto
+    margin: 0
+    max-width: 98.5%
+    padding: 0
+    width: auto
+  p.wp-caption-text
+    color: $blue2
+    line-height: 17px
+    margin: 0
+    padding: 0 4px 5px
+    a
+      border-bottom-color: $blue4
+      color: $blue4
+      &:hover
+        border-bottom-color: $blue2
+        color: $blue2
+
+.screen-reader-text, .assistive-text
+  display: none
+
+.after-clear-fix
+  &:after
+    clear: both
+    content: '.'
+    display: block
+    height: 0
+    visibility: hidden

@@ -1,0 +1,369 @@
+.page-header
+  border-bottom: $line
+  margin: 0 0 ($base_spacing + $shifted_spacing) 0
+  padding: 0 0 $base_spacing 0
+.page-title
+  font: 700 2.5em/1 $serif
+.post
+  border-bottom: $line
+  margin: $base_spacing 0 ($base_spacing + $shifted_spacing) 0
+  &:first-child
+    margin-top: 0
+  &.sticky
+    border: $line
+    padding: 1em
+  &.format-image
+    a
+      border-bottom: none
+  &.format-chat
+    p
+      margin: 0
+.page
+  @extend .post
+.entry-title
+  font: 700 1.6em/1 $serif
+  margin: 5px 0 15px 0
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+      &:after
+        content: " ↩"
+.comments-link
+  font: 400 1em $sans-serif
+  margin: 15px 0 25px 0
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+.entry-header
+  img
+    max-width: 100%
+    height: auto
+.entry-content
+  @extend .after-clear-fix
+  font: 400 1em/1.7 $sans-serif
+  p
+    margin: 10px 0 25px 0
+  code,kbd,pre,tt
+    background: $blue1
+    font: 400 1em $mono
+  code
+    padding: 0 0.2em
+  pre
+    +vendor-prefix(box-shadow, inset 0 0 15px rgba(0,0,0,0.4))
+    display: block
+    padding: 1em
+    margin: 10px 0 25px 0
+    // http://justcramer.com/2008/03/12/word-wrap-preformatted-text/
+    white-space: pre-wrap
+    white-space: -moz-pre-wrap
+    white-space: -pre-wrap
+    white-space: -o-pre-wrap
+    word-wrap: break-word
+  blockquote
+    +vendor-prefix(box-shadow, inset 0 0 15px rgba(0,0,0,0.4))
+    background: $blue1
+    display: block
+    font-style: italic
+    margin: 10px 0 25px 0
+    padding: 1em
+    & > *:first-child
+      margin-top: 0.25rem
+    & > *:last-child
+      // Reduced margin for last paragraph of a blockquote
+      margin-bottom: 0.5rem
+    cite
+      display: block
+      text-align: right
+  h1
+    font: 700 1.48em/1.6 $serif
+  h2
+    font: 700 1.29em/1.6 $serif
+  h3
+    font: 700 1.14em/1.85 $serif
+  h4
+    font: 700 1em/1.85 $serif
+  h5
+    font: 700 0.93em/1.85 $serif
+  h6
+    font: 700 0.86em/1.85 $serif
+  h2,h3,h4,h5,h6
+    margin: 1.3em 0 0.5em 0
+  ol
+    list-style: decimal outside
+  ul
+    list-style: disc outside
+  ol, ul
+    margin: 0 0 1.71em
+    line-height: 1.71
+    ol, ul
+      margin-bottom: 0
+    &:last-child
+      margin-bottom: 0
+  & > ol, & > ul
+    margin: 10px 0 25px 0
+  li
+    margin: 0 0 0 2.57em
+  img
+    max-width: 100%
+    height: auto
+    &.alighcenter
+      margin-left: auto
+      margin-right: auto
+    &.alignnone, &.alignleft
+      margin: $shifted_spacing $base_spacing $shifted_spacing 0
+    &.alignright
+      margin: $shifted_spacing 0 $shifted_spacing $base_spacing
+  img[style]
+    max-width: 100%
+    height: auto
+  a
+    border-bottom: 1px dashed $blue9
+    color: $blue9
+    text-decoration: none
+    &:hover
+      border-bottom-color: $blue6
+      color: $blue6
+    &:focus
+      border-bottom: none
+    &[href$=jpeg],
+    &[href$=jpg],
+    &[href$=jpe],
+    &[href$=png],
+    &[href$=gif]
+      border-bottom: none
+  abbr, acronym
+    border-bottom: 1px dashed $blue6
+  address
+    margin: 10px 0 25px 0
+  big
+    font-size: 1.2em
+  cite
+    font-style: italic
+  dl
+    margin: 10px 0 25px 0
+    dt
+      border-top: 1px solid $blue3
+      box-sizing: border-box
+      clear: left
+      float: left
+      font-weight: bold
+      margin: 0
+      padding: 0.25em
+      width: 30%
+    dd
+      border-top: 1px solid $blue3
+      box-sizing: border-box
+      float: left
+      width: 70%
+      padding: 0.25em
+    @extend .after-clear-fix
+  sup
+    vertical-align: super
+  sub
+    vertical-align: sub
+  table
+    margin: 10px 0 25px 0
+    th,td
+      border: 1px solid $blue1
+      line-height: 1.2
+      padding: 0.5em
+  .child-search & strong
+    background: $blue4
+  .gallery-item
+    a
+      border-bottom: none
+    dd,dt
+      border-top: none
+.page-links
+  margin: 10px 0 25px 0
+  a
+    text-decoration: none
+.page-link
+  @extend .button
+  margin: 0 0 0 0.5em
+  background-color: $blue3
+  &:hover
+    background-color: $blue3
+    color: $white
+  a &
+    background-color: $blue1
+    &:hover
+      background-color: $blue8
+      color: $blue3
+.comments-page-links
+  @extend .page-links
+  border-bottom: $line
+  padding: 0.75em 0 1.25em 0
+  // Eh, this is a WP core class..
+  .page-numbers
+    @extend .page-link
+    background-color: $blue1
+    &:hover
+      background-color: $blue8
+      color: $blue3
+    &.current
+      background-color: $blue3
+      color: $white
+.entry-summary
+  @extend .entry-content
+.entry-meta
+  color: $blue9
+  font: 400 0.875em/1.5 $sans-serif
+  margin: 30px 0 45px 0
+  .post.sticky &
+    margin-bottom: 0
+.entry-meta-icon
+  // Helper class, not actually used in HTML
+  font-weight: 300
+  &:before
+    @extend .genericon
+    font: normal 16px/1 Genericons
+    vertical-align: text-bottom
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+  margin-right: 20px
+.date
+  @extend .entry-meta-icon
+  @extend .genericon-time
+.category-links
+  @extend .entry-meta-icon
+  @extend .genericon-category
+.tags-links
+  @extend .entry-meta-icon
+  @extend .genericon-tag
+.author
+  @extend .entry-meta-icon
+  @extend .genericon-user
+  white-space: nowrap
+.nav-below
+  @extend .post
+  $padding_base: 50px
+  $padding_extra: 10px
+  border-bottom: 0
+  padding: 0 $padding_base ($base_spacing + $shifted_spacing) $padding_base
+  .nav-previous, .nav-next
+    a
+      @extend .button
+      display: inline-block
+      height: 6em
+      line-height: 6em
+      padding: 0
+      width: 6em
+      +vendor-prefix(border-radius, 3em)
+      &:hover
+        +vendor-prefix(box-shadow, 0 0 3em rgba(0, 0, 0, 0.5))
+  .nav-previous
+    font-size: 1.5em
+  .nav-next
+    a
+      margin-top: 1.5em
+      margin-bottom: 1.5em
+.nav-single
+  @extend .post
+  padding: 0 0 ($base_spacing + $shifted_spacing) 0
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+.comments-title
+  font: 700 1.14em/1.85 $serif
+.commentlist
+  border-bottom: $line
+  margin: ($base_spacing + $shifted_spacing) 0 $shifted_spacing 0
+li.comment
+  @extend .post
+  @extend .after-clear-fix
+  list-style-type: none
+  margin: $base_spacing 0
+  padding: $base_spacing 0 0 0
+  border-bottom: 0
+  &.depth-2
+    margin-left: 3em
+  &.depth-3,
+  &.depth-4,
+  &.depth-5,
+  &.depth-6,
+  &.depth-7,
+  &.depth-8,
+  &.depth-9,
+  &.depth-10
+    margin-left: 6em
+li.pingback, li.trackback
+  padding: $base_spacing 0 0 0
+  margin: $base_spacing 0
+.comment-meta
+  img
+    +vendor-prefix(border-radius, 5px)
+    clear: left
+    float: left
+    margin: 0 0.5em 0 0
+  // Comment author needs block so that the comment time will be on the next line
+  // However, comment author has a link inside, where as comment time is inside of a link. Comment time needs to be inline for this purpose
+  .comment-author
+    display: block
+    font: 700 1.34em/1 $sans-serif
+  .comment-time
+    display: inline
+    font: 300 0.875em/1.6 $sans-serif
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+  @extend .after-clear-fix
+
+.comment-reply
+  float: right
+.comment-post-author
+  border-left: 1px solid $white
+  color: $white
+  font-size: 0.5em
+  margin-left: 0.6em
+  padding-left: 0.5em
+  vertical-align: middle
+.comment-content
+  @extend .entry-content
+  // Padding left of width of avatar + padding of avatar
+  padding-left: 40px + 8px
+  p
+    margin: $base_spacing 0
+    &:first-child
+      margin-top: 0
+    &:last-child
+      margin-bottom: 0
+    
+.comment-awaiting-moderation
+  @extend .comment-content
+  color: $blue7
+  font-weight: 700
+.comment-nav-below
+  @extend .post
+  padding: 0 0 ($base_spacing + $shifted_spacing) 0
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+.nocomments
+  @extend .post
+  padding: 0 0 ($base_spacing + $shifted_spacing) 0
+#respond
+  @extend .post
+  padding: 0 0 ($base_spacing + $shifted_spacing) 0
+  h3
+    @extend .comments-title
+  p
+    padding: $shifted_spacing 0 $base_spacing 0
+  label
+    display: block
+  input[type=text], textarea, #author, #email, #url, #comment
+    @extend .text
+    font: 400 1em/1 $sans-serif
+  input[type=text], #author, #email, #url
+    width: 42.2%
+  textarea, #comment
+    width: 63.3%
+  input[type=submit], #submit
+    @extend .button

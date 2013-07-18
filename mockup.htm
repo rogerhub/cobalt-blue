@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>The Blog at Code.RogerHub</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Droid+Sans+Mono|Bitter:400,700|Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+	</head>
+	<body>
+		<div id="page" class="hfeed site">
+			<header class="site-header ssite-header-small" role="banner">
+				<div class="site-logo"><div class="genericon genericon-cloud"></div></div>
+				<div class="site-name"><a href="/">Code.RogerHub</a></div>
+				<div class="site-description">The programming blog at RogerHub</div>
+			</header>
+			<div id="main" class="wrapper">
+				<div id="primary" class="site-content">
+					<div id="content" role="main">
+						<article class="post type-post format-standard hentry">
+							<header class="entry-header">
+								<h1 class="entry-title"><a href="/">Formatting source code: What universities don't teach you</a></h1>
+								<div class="comments-link"><a href="/">2 Comments and 0 Reactions</a></div>
+							</header>
+							<div class="entry-content">
+								<p>Some programmers write code everyday completely unaware of their number-one most essential tool even works: the text editor. There&#8217;s a good reason for this. Most compilers and interpreters don&#8217;t care how code is formatted, and unless the language you&#8217;re working with cares about <a href="http://golang.org/ref/spec">file encoding</a> or <a href="http://www.python.org/dev/peps/pep-0008/#tabs-or-spaces">white space</a>, there&#8217;s no reason that you&#8217;ll ever have cause to investigate further. Here are 3 things every programmer should know about formatting source code:</p>
+								<h3>Carriage Returns, Line Feeds</h3>
+								<p>Have you ever experienced one of these issues?</p>
+								<ul>
+									<li>You open somebody&#8217;s source code only to find that everything is on one line.</li>
+									<li>At the end of every line of code, you see a <code>^M</code> character.</li>
+								</ul>
+								<p>Depending on your operating system, you&#8217;ve probably encountered at least one of these. The problem arises from a disagreement among programmers about how to best represent the beginning of a new line of text. You see, Macintosh computers used to use the Carriage Return character (Char 13, 0x0D) commonly represented by <code>\r</code> to indicate that two pieces of text were on separate lines (carriage refers to part on a typewriter). This conflicted with the Unix convention that the New Line character (Char 10, 0x0A) represented by <code>\n</code> should be used.</p>
+								<p>To maintain compatibility with both systems, Microsoft Windows decided that <b>both</b> characters should be used wherever a new line of text began, and by convention, the order of the characters was to always be <code>\r\n</code>, and never the reverse.</p>
+								<p>Newer versions of the Macintosh operating system are Unix-like and no longer use the <code>\r</code> character, but Windows still maintains their double-character convention. To see the difference this makes, compare the following two binary sequences. This one uses the Unix convention (Linux, OS X, etc.):</p>
+								<pre>00000000  59 6f 75 20 67 75 79 73  20 61 72 65 20 73 6f 20<br />
+00000010  67 72 65 61 74 2e <strong>0a</strong> 48  61 68 61 <strong>0a</strong></pre>
+								<p>And this one uses the Windows convention:</p>
+								<pre>00000000  59 6f 75 20 67 75 79 73  20 61 72 65 20 73 6f 20<br />
+00000010  67 72 65 61 74 2e <strong>0d 0a</strong>  48 61 68 61 <strong>0d 0a</strong></pre>
+								<p>The <code>^M</code> character that you may have seen comes from the fact that Carriage Return&#8217;s big-endian binary representation is <code>000 0101 (0x0D)</code>, while Capital M&#8217;s representation is <code>100 0101 (0x4D)</code>, different only their MSB!</p>
+								<p>Since the Carriage Return convention is no longer popular and the CRLF (Windows) convention is only used by one major, modern operating system, <strong>you should stick to the Unix convention when formatting your source code</strong> unless you&#8217;re implementing a Internet standard that specifies CRLF. On vim, you can check your line-ending convention with <code>:set fileformat</code> or change it with <code>:set fileformat=unix</code>.</p>
+								<p>No doubt you&#8217;ve seen this in a version control commit log:</p>
+								<pre>\ No newline at end of file</pre>
+								<p>It is convention that there is a new line after the last line of a text file. This convention isn&#8217;t followed by some text editors. Some will even add a new line upon <strong>opening</strong> a file, before you even make any changes. In vim, you can toggle this behavior with <code>:set eol binary</code> or <code>:set noeol nobinary</code>.</p>
+								<h3>Tabs vs Spaces</h3>
+								<p>Hitting the <key>Tab</key> button usually inserts one horizontal tab character (<code>\t</code>, Char 9, 0&#215;09), but this isn&#8217;t always the case. Sometimes your text editor will insert 4 spaces, 2 spaces, or 8 spaces. Furthermore, your text editor might display a tab character as 2, 4, 8, or any number of characters. While liberal application of tabs and spaces can improve the readability of your code, it is all for naught if your reader&#8217;s spaces-per-tab ratio is different from yours.</p>
+								<p>When you edit existing source code, you should make sure to follow the spacing convention of the existing code. If tabs are used, then use tabs. If spaces are used, use spaces. If they are mixed, complain to the author.</p>
+								<p>On Vim, there is a plugin called <a href="https://github.com/tpope/vim-sleuth">vim sleuth</a> that will detect the spacing style of existing source code and try to match it. It sets several important Vim settings:</p>
+								<ul>
+									<li><strong>:set tabstop (ts)</strong> &#8211; Your spaces-per-tab ratio.</li>
+									<li><strong>:set expandtab (et)</strong> &#8211; Whether or not spaces should be used instead of tabs.
+									<li><strong>:set shiftwidth (sw)</strong> &#8211; How many characters your cursor will shift to the right when you hit the <key>Tab</key> key. If shiftwidth is not a multiple of tabstop, then spaces will be used to satisfy the remainder.</li>
+								</ul>
+								<p>Occasionally, it may be useful to adjust these yourself in order to more easily read code that has been formatted with both tabs and spaces (ಠ_ಠ). For your own source code, you should always exclusively use either spaces or tabs, and never both.</p>
+								<h3>File Encoding</h3>
+								<p>If this hasn&#8217;t happened to you before, you&#8217;ve probably at least seen it around the Internet: apostrophes like the one in <code>Roger&#8217;s</code> get turned into funky stuff like <code>Roger&#226;&#8364;&#8482;s</code>. File encodings are exactly why this happens.</p>
+								<p>The apostrophe used in the example above isn&#8217;t Apostraphe, ASCII Char 0&#215;27, but Unicode Character <code>RIGHT SINGLE QUOTATION MARK 0x2019</code>. Unicode is an extended character encoding that provides support for things like Chinese characters and happy faces. It uses different sequences of bits to express different characters.</p>
+								<p>The only reason why <code>Roger</code> is still readable in the above example is the fact that ASCII characters originally only used 7 bits per character. Obviously, representing thousands of Chinese characters in only 7 bits is impossible, and switching to 16 bits per character would double the size of any text file. This is why other file encodings are variable-length encodings and use the unused 0&#215;80 to 0xFF range of ASCII to indicate control characters, like characters that indicate how many bytes a certain character takes up. The important part is, plain ASCII is always valid in the other encodings.</p>
+								<p>The issue arises when extended character set encodings are mixed and the programmer forgets to specify which is being used. So, back to the example above. That special quotation mark is a valid unicode UTF-8 character. Here is its hexdump:</p>
+								<pre>00000000  e2 80 99</pre>
+								<p>In binary, it&#8217;s:</p>
+								<pre>11100010 10000000 10011001</pre>
+								<p>UTF-8&#8242;s run-length encoding works by indicating the length of the character using the position of the first <code>0</code> in the character&#8217;s binary encoding. Every subsequent data-character begins with <code>0b10</code>. In this case, the first <code>0</code> follows 3 <code>1</code>s, which indicates that this is a 16-bit character composed of 3 bytes. If you add up the remainder bits (4 in the first byte, 6 in the second byte, and 6 in the third byte), you see that they add up to 16 data bits:</p>
+								<pre><u>1110</u>0010 <u>10</u>000000 <u>10</u>011001 (Control bits)</pre>
+								<pre>1110<u>0010</u> 10<u>000000</u> 10<u>011001</u> (Data bits)</pre>
+								<p>Reassemble those data bits and you get <code>00100000 00011001</code> or <code>0x2019</code>, the hexadecimal character code I mentioned before!</p>
+								<p>Many text editors now interpret source code as UTF-8 by default, and only try the <code>ISO-8859-1</code> standard when it encounters a illegal UTF-8 character. However, web browsers usually do the opposite. Depending on the <code>HTTP Content-Type</code> header and doctype, a web browser may sometimes interpret a document as <code>ISO-8859-1</code> by default when there is no explicit <code>Content-Encoding</code> specified (though you should always specify this, either in your headers, or better yet, in the HTML itself as a meta tag). The same bits above, when interpreted as an <code>ISO-8599-1</code> sequence produce:</p>
+								<pre>&#226;&#8364;&#8482;</pre>
+								<p>ISO-8599-1 is also known as <code>latin-1</code>. Each character is 1 byte long, and there are no multi-byte characters. The ISO-8599-1 encoding of those three characters is <code>e2 80 99</code>, exactly the same as the Unicode encoding from before.</p>
+								<div class="page-links">Pages:<a href="/">1</a><a href="/">2</a><a href="/">Next page</a></div>
+							</div>
+							<footer class="entry-meta">
+								<span class="date">
+									<a href="/" title="My dick" rel="bookmark">
+										<time class="entry-date" datetime="2013-02-13T12:00:00+00:00">February 2, 2013</time>
+									</a>
+								</span>
+								<span class="category-links">
+									<a href="/" rel="category tag">Blog</a>
+								</span>
+								<span class="tags-links">
+									<a href="/" rel="tag">sci-fi</a>
+								</span>
+								<span class="author vcard">
+									<a href="/" rel="author">Roger Chen</a>
+								</span>
+							</footer>
+						</article>
+						<!--
+						<article class="post type-post format-standard hentry">
+							<header class="entry-header">
+								<h1 class="entry-title"><a href="/">Tumblr's Phishing Protection Code</a></h1>
+								<div class="comments-link"><a href="/">1 Comments and 0 Reactions</a></div>
+							</header>
+							<div class="entry-content">
+								<p>At the top of every Tumblr user’s blog, there’s a piece of JavaScript inserted by Tumblr itself. In general, Tumblr is very generous about the control they give you over your blog’s appearance. They don’t insert any advertisements or enforce any global content other than a Quantcast visitor analytics script, follow/dashboard controls on the upper right, and this script. I’ve posted the first few lines here:</p>
+							</div>
+							<footer class="entry-meta">
+								<span class="date">
+									<a href="/" title="My dick" rel="bookmark">
+										<time class="entry-date" datetime="2013-02-13T12:00:00+00:00">February 2, 2013</time>
+									</a>
+								</span>
+								<span class="category-links">
+									<a href="/" rel="category tag">Blog</a>
+								</span>
+								<span class="tags-links">
+									<a href="/" rel="tag">sci-fi</a>
+								</span>
+								<span class="author vcard">
+									<a href="/" rel="author">Roger Chen</a>
+								</span>
+							</footer>
+						</article>
+						-->
+						<!--
+						<nav id="nav-below" class="navigation nav-below" role="navigation">
+							<div class="nav-previous alignleft">
+								<a href="/"><span class="meta-nav">&larr;</span> Older</a>
+							</div>
+							<div class="nav-next alignright">
+								<a href="/">Newer <span class="meta-nav">&rarr;</span></a>
+							</div>
+							<div class="clear-fix"></div>
+						</nav>
+						-->
+						<nav class="nav-single">
+							<div class="nav-previous alignleft">
+								<a href="/"><span class="meta-nav">&larr;</span> How to kill a mockingbird</a>
+							</div>
+							<div class="nav-next alignright">
+								<a href="/">Why I shouldn't have fucked my neighbor <span class="meta-nav">&rarr;</span></a>
+							</div>
+							<div class="clear-fix"></div>
+						</nav>
+						<div id="comments" class="comments-area">
+							<h2 class="comments-title">One thought on &ldquo;<span>Formatting source code: What universities don't teach you</span>&rdquo;</h2>
+							<ol class="commentlist">
+								<li class="comment">
+									<header class="comment-meta comment-author vcard">
+										<img src="http://placehold.it/44x44" />
+										<cite class="fn"><a href="/">Taylor Swift</a></cite>
+										<a href="/"><time datetime="2013-01-01T00:00:00+08:00">January 1, 2010</time></a>
+									</header>
+									<p class="comment-awaiting-moderation">Your comment is awaiting moderation</p>
+									<section class="comment-content comment">
+										<p>Hey I am a stupid buttt. Can you help me find my ass? It seems to have fallen apart.</p>
+									</section>
+								</li>
+								<li class="comment">
+									<header class="comment-meta comment-author vcard">
+										<img src="http://placehold.it/44x44" />
+										<cite class="fn"><a href="/">John Meyer</a></cite>
+										<a href="/"><time datetime="2013-01-01T00:00:00+08:00">January 2, 2010</time></a>
+									</header>
+									<section class="comment-content comment">
+										<p>TAYLOR! I have your butt here! come and get it from ol' John,</p>
+									</section>
+								</li>
+							</ol>
+							<nav id="comment-nav-below" class="navigation comment-nav-below" role="navigation">
+								<div class="nav-previous alignleft"><a href="/">&larr; Older Comments</a></div>
+								<div class="nav-next alignright"><a href="/">Newer Comments &rarr;</a></div>
+								<div class="clear-fix"></div>
+							</nav>
+							<p class="nocomments">Comments are closed</p>
+							<div id="respond">
+								<h3 id="reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/infrastructure/170/formatting-source-code-what-universities-dont-teach-you/#respond" style="display:none;">Cancel reply</a></small></h3>
+								<form action="http://code.rogerhub.com/wp-comments-post.php" method="post" id="commentform">
+									<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>
+									<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-required='true' /></p>
+									<p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" type="text" value="" size="30" /></p>
+									<p class="comment-form-comment"><label for="comment">Comment</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>
+									<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+									<p class="form-submit">
+										<input name="submit" type="submit" id="submit" value="Post Comment" />
+										<input type='hidden' name='comment_post_ID' value='170' id='comment_post_ID' />
+										<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+									</p>
+								</form>
+							</div><!-- #respond -->
+
+						</div>
+					</div>
+				</div>
+				<div id="secondary" class="widget-area" role="complementary">
+					<aside class="widget"><form role='search' method='get' id='searchform' action='/'>
+						<div>
+							<label class="screen-reader-text" for="s">Search for:</label>
+							<input type="text" class="text widget-search-bar" value="" name="s" id="s" placeholder="Search" />
+							<input type="submit" class="button" id="searchsubmit" value="Search" />
+						</div>
+					</form></aside>
+					<aside id="recent-posts-2" class="widget widget_recent_entries">
+					<h3 class="widget-title">Recent Posts</h3>
+					<ul>
+						<li>
+						<a href="http://code.rogerhub.com/infrastructure/170/formatting-source-code-what-universities-dont-teach-you/" title="Formatting source code: What universities don&#8217;t teach you">Formatting source code: What universities don&#8217;t teach you</a>
+						<span class="post-date">May 30, 2013</span>
+						</li>
+						<li>
+						<a href="http://code.rogerhub.com/programming/145/tumblrs-phishing-protection-code/" title="Tumblr&#8217;s Phishing Protection Code">Tumblr&#8217;s Phishing Protection Code</a>
+						<span class="post-date">April 20, 2013</span>
+						</li>
+						<li>
+						<a href="http://code.rogerhub.com/terminal-fu/158/using-locate-to-quickly-change-directories/" title="Using locate to quickly change directories">Using locate to quickly change directories</a>
+						<span class="post-date">April 20, 2013</span>
+						</li>
+						<li>
+						<a href="http://code.rogerhub.com/programming/135/anti-fraud-detection-in-best-of-berkeley/" title="Anti-fraud Detection in Best of Berkeley">Anti-fraud Detection in Best of Berkeley</a>
+						<span class="post-date">April 11, 2013</span>
+						</li>
+						<li>
+						<a href="http://code.rogerhub.com/terminal-fu/120/grabbing-an-apache-generated-directory-listing/" title="Grabbing an apache-generated directory listing">Grabbing an apache-generated directory listing</a>
+						<span class="post-date">April 10, 2013</span>
+						</li>
+						<li>
+						<a href="http://code.rogerhub.com/terminal-fu/112/how-to-tell-if-your-system-is-big-endian-or-little-endian/" title="How to tell if your system is big endian or little endian">How to tell if your system is big endian or little endian</a>
+						<span class="post-date">March 25, 2013</span>
+						</li>
+					</ul>
+					</aside>
+					<aside id="archives-2" class="widget widget_archive">
+					<h3 class="widget-title">Archives</h3>
+					<ul>
+						<li><a href='http://code.rogerhub.com/date/2013/05/' title='May 2013'>May 2013</a></li>
+						<li><a href='http://code.rogerhub.com/date/2013/04/' title='April 2013'>April 2013</a></li>
+						<li><a href='http://code.rogerhub.com/date/2013/03/' title='March 2013'>March 2013</a></li>
+					</ul>
+					</aside>
+					<aside id="categories-2" class="widget widget_categories">
+						<h3 class="widget-title">Categories</h3>
+						<ul>
+							<li class="cat-item cat-item-14"><a href="http://code.rogerhub.com/category/bughunt/" title="View all posts filed under Bughunt">Bughunt</a>
+							</li>
+							<li class="cat-item cat-item-25"><a href="http://code.rogerhub.com/category/infrastructure/" title="View all posts filed under Infrastructure">Infrastructure</a>
+							</li>
+							<li class="cat-item cat-item-20"><a href="http://code.rogerhub.com/category/programming/" title="View all posts filed under Programming">Programming</a>
+							</li>
+							<li class="cat-item cat-item-4"><a href="http://code.rogerhub.com/category/terminal-fu/" title="View all posts filed under Terminal-Fu">Terminal-Fu</a>
+							</li>
+						</ul>
+					</aside>
+					<aside id="tag_cloud-2" class="widget widget_tag_cloud">
+						<h3 class="widget-title">Tags</h3>
+						<div class="tagcloud">
+							<a href='http://code.rogerhub.com/tag/ajax/' class='tag-link-18' title='1 topic' style='font-size: 8pt;'>ajax</a>
+							<a href='http://code.rogerhub.com/tag/algorithms/' class='tag-link-41' title='1 topic' style='font-size: 8pt;'>algorithms</a>
+							<a href='http://code.rogerhub.com/tag/alias/' class='tag-link-33' title='1 topic' style='font-size: 8pt;'>alias</a>
+							<a href='http://code.rogerhub.com/tag/backup/' class='tag-link-12' title='1 topic' style='font-size: 8pt;'>backup</a>
+							<a href='http://code.rogerhub.com/tag/bash/' class='tag-link-8' title='5 topics' style='font-size: 22pt;'>bash</a>
+							<a href='http://code.rogerhub.com/tag/bc/' class='tag-link-31' title='1 topic' style='font-size: 8pt;'>bc</a>
+							<a href='http://code.rogerhub.com/tag/bits/' class='tag-link-36' title='1 topic' style='font-size: 8pt;'>bits</a>
+							<a href='http://code.rogerhub.com/tag/calculator/' class='tag-link-30' title='1 topic' style='font-size: 8pt;'>calculator</a>
+							<a href='http://code.rogerhub.com/tag/classical-music/' class='tag-link-38' title='1 topic' style='font-size: 8pt;'>classical music</a>
+							<a href='http://code.rogerhub.com/tag/cloud/' class='tag-link-13' title='1 topic' style='font-size: 8pt;'>cloud</a>
+							<a href='http://code.rogerhub.com/tag/code-formatting/' class='tag-link-49' title='1 topic' style='font-size: 8pt;'>code formatting</a>
+							<a href='http://code.rogerhub.com/tag/crayon/' class='tag-link-19' title='1 topic' style='font-size: 8pt;'>crayon</a>
+							<a href='http://code.rogerhub.com/tag/crlf/' class='tag-link-51' title='1 topic' style='font-size: 8pt;'>crlf</a>
+							<a href='http://code.rogerhub.com/tag/dailycal/' class='tag-link-6' title='3 topics' style='font-size: 16.75pt;'>dailycal</a>
+							<a href='http://code.rogerhub.com/tag/data/' class='tag-link-42' title='1 topic' style='font-size: 8pt;'>data</a>
+							<a href='http://code.rogerhub.com/tag/dropbox/' class='tag-link-10' title='1 topic' style='font-size: 8pt;'>dropbox</a>
+							<a href='http://code.rogerhub.com/tag/endianness/' class='tag-link-35' title='1 topic' style='font-size: 8pt;'>endianness</a>
+							<a href='http://code.rogerhub.com/tag/file-encoding/' class='tag-link-50' title='1 topic' style='font-size: 8pt;'>file encoding</a>
+							<a href='http://code.rogerhub.com/tag/firefox/' class='tag-link-26' title='1 topic' style='font-size: 8pt;'>firefox</a>
+							<a href='http://code.rogerhub.com/tag/firstpost/' class='tag-link-9' title='1 topic' style='font-size: 8pt;'>firstpost</a>
+							<a href='http://code.rogerhub.com/tag/fraud/' class='tag-link-40' title='2 topics' style='font-size: 13.25pt;'>fraud</a>
+							<a href='http://code.rogerhub.com/tag/html/' class='tag-link-45' title='1 topic' style='font-size: 8pt;'>html</a>
+							<a href='http://code.rogerhub.com/tag/http/' class='tag-link-17' title='2 topics' style='font-size: 13.25pt;'>http</a>
+							<a href='http://code.rogerhub.com/tag/https/' class='tag-link-28' title='1 topic' style='font-size: 8pt;'>https</a>
+							<a href='http://code.rogerhub.com/tag/javascript/' class='tag-link-44' title='1 topic' style='font-size: 8pt;'>javascript</a>
+							<a href='http://code.rogerhub.com/tag/linux/' class='tag-link-32' title='1 topic' style='font-size: 8pt;'>linux</a>
+							<a href='http://code.rogerhub.com/tag/lipsum/' class='tag-link-21' title='1 topic' style='font-size: 8pt;'>lipsum</a>
+							<a href='http://code.rogerhub.com/tag/locate/' class='tag-link-47' title='1 topic' style='font-size: 8pt;'>locate</a>
+							<a href='http://code.rogerhub.com/tag/math/' class='tag-link-34' title='2 topics' style='font-size: 13.25pt;'>math</a>
+							<a href='http://code.rogerhub.com/tag/music/' class='tag-link-37' title='1 topic' style='font-size: 8pt;'>music</a>
+							<a href='http://code.rogerhub.com/tag/oneliner/' class='tag-link-7' title='3 topics' style='font-size: 16.75pt;'>oneliner</a>
+							<a href='http://code.rogerhub.com/tag/php/' class='tag-link-22' title='1 topic' style='font-size: 8pt;'>php</a>
+							<a href='http://code.rogerhub.com/tag/placeholder/' class='tag-link-24' title='1 topic' style='font-size: 8pt;'>placeholder</a>
+							<a href='http://code.rogerhub.com/tag/random/' class='tag-link-23' title='2 topics' style='font-size: 13.25pt;'>random</a>
+							<a href='http://code.rogerhub.com/tag/regular-expressions/' class='tag-link-39' title='2 topics' style='font-size: 13.25pt;'>regular expressions</a>
+							<a href='http://code.rogerhub.com/tag/sass/' class='tag-link-5' title='1 topic' style='font-size: 8pt;'>sass</a>
+							<a href='http://code.rogerhub.com/tag/search/' class='tag-link-46' title='1 topic' style='font-size: 8pt;'>search</a>
+							<a href='http://code.rogerhub.com/tag/security/' class='tag-link-15' title='3 topics' style='font-size: 16.75pt;'>security</a>
+							<a href='http://code.rogerhub.com/tag/servers/' class='tag-link-11' title='1 topic' style='font-size: 8pt;'>servers</a>
+							<a href='http://code.rogerhub.com/tag/ssh/' class='tag-link-27' title='1 topic' style='font-size: 8pt;'>ssh</a>
+							<a href='http://code.rogerhub.com/tag/tabs/' class='tag-link-52' title='1 topic' style='font-size: 8pt;'>tabs</a>
+							<a href='http://code.rogerhub.com/tag/tumblr/' class='tag-link-43' title='1 topic' style='font-size: 8pt;'>tumblr</a>
+							<a href='http://code.rogerhub.com/tag/unicode/' class='tag-link-48' title='1 topic' style='font-size: 8pt;'>unicode</a>
+							<a href='http://code.rogerhub.com/tag/wifi/' class='tag-link-29' title='1 topic' style='font-size: 8pt;'>wifi</a>
+							<a href='http://code.rogerhub.com/tag/wordpress/' class='tag-link-16' title='1 topic' style='font-size: 8pt;'>wordpress</a>
+						</div>
+					</aside>
+				</div>
+			</div>
+			<footer id="colophon" role="contentinfo">
+				<div class="site-info">
+					Proudly powered by <a href="/">WordPress</a> with the <a href="/">Cobalt WordPress Theme by RogerHub</a>.
+				</div>
+			</footer>
+			<div class="clear-fix"></div>
+		</div>
+	</body>
+</html>

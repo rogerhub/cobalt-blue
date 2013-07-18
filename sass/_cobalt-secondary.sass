@@ -1,0 +1,39 @@
+.widget
+  @extend .entry-content
+  border-bottom: $line
+  margin: 0 0 20px 0
+  padding: 0 0 ($base_spacing + $shifted_spacing) 0
+  p
+    margin: 0
+  .textwidget p
+    margin: 0 0 $base_spacing 0
+  ol, ul
+    margin-bottom: 0
+  .textwidget p
+    margin: 10px 0 25px 0
+  li
+    margin-right: 2.57em
+  a
+    border-bottom-style: dotted
+  &:last-child
+    border-bottom-width: 0
+    +mobile1
+      border-bottom-width: 1px
+  .widget-title
+    font: 700 1.29em/1.6 $serif
+    margin: 0 0 10px 0
+
+.widget-search-bar
+  width: 53.333%
+
+.widget_recent_entries
+  .post-date
+    color: $blue8
+    font-size: 0.875em
+    vertical-align: center
+    &:before
+      content: ' - '
+.tagcloud
+  a
+    border-bottom: none
+    vertical-align: baseline
