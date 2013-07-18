@@ -44,10 +44,6 @@ All types of producible HTML tags and WordPress CSS classes have been styled ele
 
 WordPress 3.6 was supposed to have post formats, but they have delayed this feature. Cobalt WordPress Theme will support post formats once they are officially released. Here is an example of how an image post would look. It has a caption.
 
-![Some comments organized in 3 levels.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-5.png)
-
-The built-in comments are pretty good. (The contrived comments shown here don't do them justice..) They support the built-in WordPress JavaScript comment reply system.
-
 ![The response form.](https://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-6.5.png)
 
 This is the response form for the built-in comments system.
