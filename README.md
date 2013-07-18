@@ -14,7 +14,7 @@ Demo
 
 A live version of this theme is running on my personal coding blog. See below:
 
- - [Open demo](http://code.rogerhub.com)
+ - [Live demo](http://code.rogerhub.com)
 
 Installation
 ------------
@@ -63,6 +63,8 @@ The sexiest "More" button yet. The design on this navigation element was inspire
 ![The editor in WordPress.](https://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-8.png)
 
 A complete editor style for the built-in editor that mimics the styles from the theme. (In fact, the CSS rules come from the exact same SASS code.) You can now see what the result will look like as you're editing. (And it sure beats the default WordPress editor styles.)
+
+ - [Live demo](http://code.rogerhub.com)
 
 License
 -------
