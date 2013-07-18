@@ -28,7 +28,7 @@ Screenshots
 
 There are a lot of these, so hang tight.
 
-![Some pictures of water and bridges with a sidebar on the right.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-1.png)
+![Some pictures of water and bridges with a sidebar on the right.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-2.png)
 
 This photo layout was created using the built-in [WordPress Gallery feature](http://codex.wordpress.org/The_WordPress_Gallery). This example is laid out in a 3-column grid.
 
