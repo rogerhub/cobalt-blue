@@ -1,8 +1,7 @@
-html
+body
   background: $blue2
   color: $white
   font: 400 1em $sans-serif
-  padding: 0 25px 25px 25px
   word-wrap: break-word
 a
   color: inherit
@@ -13,14 +12,24 @@ a
 .clear-fix
   clear: both
 
-.text
+.text,
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week]
   border: 1px solid $blue9
   padding: 4px
   vertical-align: middle
   &:focus
     outline: 1px solid $blue8
     outline-offset: 0
-.button
+.button, input[type=submit], button
   background-color: $blue1
   border: none
   color: $white
@@ -52,6 +61,7 @@ a
 .wp-caption
   background: #fff
   border: 1px solid #f0f0f0
+  color: $blue2
   /* Image does not overflow the content area
   max-width: 96%
   padding: 5px 3px 10px
@@ -72,7 +82,6 @@ a
     padding: 0
     width: auto
   p.wp-caption-text
-    color: $blue2
     line-height: 17px
     margin: 0
     padding: 0 4px 5px
@@ -82,6 +91,14 @@ a
       &:hover
         border-bottom-color: $blue2
         color: $blue2
+
+.gallery-icon
+  img
+    width: 85%
+
+.gallery-caption
+  color: white
+  text-align: center
 
 .screen-reader-text, .assistive-text
   display: none

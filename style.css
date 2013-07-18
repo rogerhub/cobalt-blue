@@ -1,12 +1,15 @@
 @charset "UTF-8";
-/* Theme Name: Cobalt Blue WordPress
+/* TO DEVELOPERS: Don't read style.css! Look at the source in sass/style.sass instead!
+ *
+ * Theme Name: Cobalt Blue WordPress
  * Theme URI: https://github.com/rogerhub/cobalt-blue-wordpress
  * Description: A two-column blue theme for WordPress.
- * Version: 1.0
+ * Version: 1.1
  * Author: Roger Chen
- * Author URI: http://rogerhub.com
- * Tags: two-column, fixed-width
- * License: GPLv2 or greater */
+ * Author URI: http://code.rogerhub.com
+ * Tags: two-columns, blue, flexible-width, custom-header, custom-menu, editor-style, featured-images, flexible-header, sticky-post, threaded-comments, translation-ready
+ * License: GPLv2 or greater
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html */
 /* http://meyerweb.com/eric/tools/css/reset/
  * v2.0 | 20110126
  * License: none (public domain) */
@@ -378,11 +381,10 @@ table {
 .genericon-leftarrow:before {
   content: "\f503"; }
 
-html {
+body {
   background: #1e3442;
   color: white;
   font: 400 1em "Source Sans Pro", sans-serif;
-  padding: 0 25px 25px 25px;
   word-wrap: break-word; }
 
 a {
@@ -403,15 +405,35 @@ a {
 .clear-fix {
   clear: both; }
 
-.text, #respond input[type=text], #respond textarea, #respond #author, #respond #email, #respond #url, #respond #comment {
+.text, #respond input[type=text], #respond textarea, #respond #author, #respond #email, #respond #url, #respond #comment,
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week] {
   border: 1px solid #bbd1df;
   padding: 4px;
   vertical-align: middle; }
-  .text:focus, #respond input[type=text]:focus, #respond textarea:focus, #respond #author:focus, #respond #email:focus, #respond #url:focus, #respond #comment:focus {
+  .text:focus, #respond input[type=text]:focus, #respond textarea:focus, #respond #author:focus, #respond #email:focus, #respond #url:focus, #respond #comment:focus,
+  input[type=email]:focus,
+  input[type=month]:focus,
+  input[type=number]:focus,
+  input[type=password]:focus,
+  input[type=search]:focus,
+  input[type=tel]:focus,
+  input[type=text]:focus,
+  input[type=time]:focus,
+  input[type=url]:focus,
+  input[type=week]:focus {
     outline: 1px solid #a0c0d3;
     outline-offset: 0; }
 
-.button, .page-link, .comments-page-links .page-numbers, .nav-below .nav-previous a, .nav-below .nav-next a, #respond input[type=submit], #respond #submit {
+.button, .page-link, .comments-page-links .page-numbers, .nav-below .nav-previous a, .nav-below .nav-next a, #respond input[type=submit], #respond #submit, input[type=submit], button {
   background-color: #121f27;
   border: none;
   color: white;
@@ -431,7 +453,7 @@ a {
   -ms-transition: background 0.3s, color 0.1s;
   -moz-transition: background 0.3s, color 0.1s;
   -o-transition: background 0.3s, color 0.1s; }
-  .button:hover, .page-link:hover, .comments-page-links .page-numbers:hover, .nav-below .nav-previous a:hover, .nav-below .nav-next a:hover, #respond input[type=submit]:hover, #respond #submit:hover {
+  .button:hover, .page-link:hover, .comments-page-links .page-numbers:hover, .nav-below .nav-previous a:hover, .nav-below .nav-next a:hover, #respond input[type=submit]:hover, #respond #submit:hover, input[type=submit]:hover, button:hover {
     background-color: #a0c0d3;
     color: #375f78; }
 
@@ -449,6 +471,7 @@ a {
 .wp-caption {
   background: white;
   border: 1px solid #f0f0f0;
+  color: #1e3442;
   /* Image does not overflow the content area */
   max-width: 96%;
   padding: 5px 3px 10px;
@@ -469,7 +492,6 @@ a {
     padding: 0;
     width: auto; }
   .wp-caption p.wp-caption-text {
-    color: #1e3442;
     line-height: 17px;
     margin: 0;
     padding: 0 4px 5px; }
@@ -480,15 +502,163 @@ a {
         border-bottom-color: #1e3442;
         color: #1e3442; }
 
+.gallery-icon img {
+  width: 85%; }
+
+.gallery-caption {
+  color: white;
+  text-align: center; }
+
 .screen-reader-text, .assistive-text {
   display: none; }
 
-.after-clear-fix:after, .entry-content:after, .entry-summary:after, .comment-content:after, .comment-awaiting-moderation:after, .widget:after, .entry-content dl:after, .entry-summary dl:after, .comment-content dl:after, .comment-awaiting-moderation dl:after, .widget dl:after, li.comment:after, .comment-meta:after {
+.after-clear-fix:after, .cobalt-content:after, .entry-content:after, .entry-summary:after, .comment-content:after, .comment-awaiting-moderation:after, .widget:after, .cobalt-content dl:after, .entry-content dl:after, .entry-summary dl:after, .comment-content dl:after, .comment-awaiting-moderation dl:after, .widget dl:after, li.comment:after, .comment-meta:after {
   clear: both;
   content: ".";
   display: block;
   height: 0;
   visibility: hidden; }
+
+.cobalt-content, .entry-content, .entry-summary, .comment-content, .comment-awaiting-moderation, .widget {
+  font: 400 1em/1.7 "Source Sans Pro", sans-serif; }
+  .cobalt-content p, .entry-content p, .entry-summary p, .comment-content p, .comment-awaiting-moderation p, .widget p {
+    margin: 10px 0 25px 0; }
+  .cobalt-content code, .entry-content code, .entry-summary code, .comment-content code, .comment-awaiting-moderation code, .widget code, .cobalt-content kbd, .entry-content kbd, .entry-summary kbd, .comment-content kbd, .comment-awaiting-moderation kbd, .widget kbd, .cobalt-content pre, .entry-content pre, .entry-summary pre, .comment-content pre, .comment-awaiting-moderation pre, .widget pre, .cobalt-content tt, .entry-content tt, .entry-summary tt, .comment-content tt, .comment-awaiting-moderation tt, .widget tt {
+    background: #121f27;
+    font: 400 1em "Droid Sans Mono", monospace; }
+  .cobalt-content code, .entry-content code, .entry-summary code, .comment-content code, .comment-awaiting-moderation code, .widget code {
+    padding: 0 0.2em; }
+  .cobalt-content pre, .entry-content pre, .entry-summary pre, .comment-content pre, .comment-awaiting-moderation pre, .widget pre {
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -ms-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -o-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    display: block;
+    padding: 1em;
+    margin: 10px 0 25px 0;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word; }
+  .cobalt-content blockquote, .entry-content blockquote, .entry-summary blockquote, .comment-content blockquote, .comment-awaiting-moderation blockquote, .widget blockquote {
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -ms-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    -o-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    background: #121f27;
+    display: block;
+    font-style: italic;
+    margin: 10px 0 25px 0;
+    padding: 1em; }
+    .cobalt-content blockquote > *:first-child, .entry-content blockquote > *:first-child, .entry-summary blockquote > *:first-child, .comment-content blockquote > *:first-child, .comment-awaiting-moderation blockquote > *:first-child, .widget blockquote > *:first-child {
+      margin-top: 0.25rem; }
+    .cobalt-content blockquote > *:last-child, .entry-content blockquote > *:last-child, .entry-summary blockquote > *:last-child, .comment-content blockquote > *:last-child, .comment-awaiting-moderation blockquote > *:last-child, .widget blockquote > *:last-child {
+      margin-bottom: 0.5rem; }
+    .cobalt-content blockquote cite, .entry-content blockquote cite, .entry-summary blockquote cite, .comment-content blockquote cite, .comment-awaiting-moderation blockquote cite, .widget blockquote cite {
+      display: block;
+      text-align: right; }
+  .cobalt-content h1, .entry-content h1, .entry-summary h1, .comment-content h1, .comment-awaiting-moderation h1, .widget h1 {
+    font: 700 1.48em/1.6 Bitter, serif; }
+  .cobalt-content h2, .entry-content h2, .entry-summary h2, .comment-content h2, .comment-awaiting-moderation h2, .widget h2 {
+    font: 700 1.29em/1.6 Bitter, serif; }
+  .cobalt-content h3, .entry-content h3, .entry-summary h3, .comment-content h3, .comment-awaiting-moderation h3, .widget h3 {
+    font: 700 1.14em/1.85 Bitter, serif; }
+  .cobalt-content h4, .entry-content h4, .entry-summary h4, .comment-content h4, .comment-awaiting-moderation h4, .widget h4 {
+    font: 700 1em/1.85 Bitter, serif; }
+  .cobalt-content h5, .entry-content h5, .entry-summary h5, .comment-content h5, .comment-awaiting-moderation h5, .widget h5 {
+    font: 700 0.93em/1.85 Bitter, serif; }
+  .cobalt-content h6, .entry-content h6, .entry-summary h6, .comment-content h6, .comment-awaiting-moderation h6, .widget h6 {
+    font: 700 0.86em/1.85 Bitter, serif; }
+  .cobalt-content h2, .entry-content h2, .entry-summary h2, .comment-content h2, .comment-awaiting-moderation h2, .widget h2, .cobalt-content h3, .entry-content h3, .entry-summary h3, .comment-content h3, .comment-awaiting-moderation h3, .widget h3, .cobalt-content h4, .entry-content h4, .entry-summary h4, .comment-content h4, .comment-awaiting-moderation h4, .widget h4, .cobalt-content h5, .entry-content h5, .entry-summary h5, .comment-content h5, .comment-awaiting-moderation h5, .widget h5, .cobalt-content h6, .entry-content h6, .entry-summary h6, .comment-content h6, .comment-awaiting-moderation h6, .widget h6 {
+    margin: 1.3em 0 0.5em 0; }
+  .cobalt-content ol, .entry-content ol, .entry-summary ol, .comment-content ol, .comment-awaiting-moderation ol, .widget ol {
+    list-style: decimal outside; }
+  .cobalt-content ul, .entry-content ul, .entry-summary ul, .comment-content ul, .comment-awaiting-moderation ul, .widget ul {
+    list-style: disc outside; }
+  .cobalt-content ol, .entry-content ol, .entry-summary ol, .comment-content ol, .comment-awaiting-moderation ol, .widget ol, .cobalt-content ul, .entry-content ul, .entry-summary ul, .comment-content ul, .comment-awaiting-moderation ul, .widget ul {
+    margin: 0 0 1.71em;
+    line-height: 1.71; }
+    .cobalt-content ol ol, .entry-content ol ol, .entry-summary ol ol, .comment-content ol ol, .comment-awaiting-moderation ol ol, .widget ol ol, .cobalt-content ol ul, .entry-content ol ul, .entry-summary ol ul, .comment-content ol ul, .comment-awaiting-moderation ol ul, .widget ol ul, .cobalt-content ul ol, .entry-content ul ol, .entry-summary ul ol, .comment-content ul ol, .comment-awaiting-moderation ul ol, .widget ul ol, .cobalt-content ul ul, .entry-content ul ul, .entry-summary ul ul, .comment-content ul ul, .comment-awaiting-moderation ul ul, .widget ul ul {
+      margin-bottom: 0; }
+    .cobalt-content ol:last-child, .entry-content ol:last-child, .entry-summary ol:last-child, .comment-content ol:last-child, .comment-awaiting-moderation ol:last-child, .widget ol:last-child, .cobalt-content ul:last-child, .entry-content ul:last-child, .entry-summary ul:last-child, .comment-content ul:last-child, .comment-awaiting-moderation ul:last-child, .widget ul:last-child {
+      margin-bottom: 0; }
+  .cobalt-content > ol, .entry-content > ol, .entry-summary > ol, .comment-content > ol, .comment-awaiting-moderation > ol, .widget > ol, .cobalt-content > ul, .entry-content > ul, .entry-summary > ul, .comment-content > ul, .comment-awaiting-moderation > ul, .widget > ul {
+    margin: 10px 0 25px 0; }
+  .cobalt-content li, .entry-content li, .entry-summary li, .comment-content li, .comment-awaiting-moderation li, .widget li {
+    margin: 0 0 0 2.57em; }
+  .cobalt-content img, .entry-content img, .entry-summary img, .comment-content img, .comment-awaiting-moderation img, .widget img {
+    max-width: 100%;
+    height: auto; }
+    .cobalt-content img.alighcenter, .entry-content img.alighcenter, .entry-summary img.alighcenter, .comment-content img.alighcenter, .comment-awaiting-moderation img.alighcenter, .widget img.alighcenter {
+      margin-left: auto;
+      margin-right: auto; }
+    .cobalt-content img.alignnone, .entry-content img.alignnone, .entry-summary img.alignnone, .comment-content img.alignnone, .comment-awaiting-moderation img.alignnone, .widget img.alignnone, .cobalt-content img.alignleft, .entry-content img.alignleft, .entry-summary img.alignleft, .comment-content img.alignleft, .comment-awaiting-moderation img.alignleft, .widget img.alignleft {
+      margin: 5px 20px 5px 0; }
+    .cobalt-content img.alignright, .entry-content img.alignright, .entry-summary img.alignright, .comment-content img.alignright, .comment-awaiting-moderation img.alignright, .widget img.alignright {
+      margin: 5px 0 5px 20px; }
+  .cobalt-content img[style], .entry-content img[style], .entry-summary img[style], .comment-content img[style], .comment-awaiting-moderation img[style], .widget img[style] {
+    max-width: 100%;
+    height: auto; }
+  .cobalt-content a, .entry-content a, .entry-summary a, .comment-content a, .comment-awaiting-moderation a, .widget a {
+    border-bottom: 1px dashed #bbd1df;
+    color: #bbd1df;
+    text-decoration: none; }
+    .cobalt-content a:hover, .entry-content a:hover, .entry-summary a:hover, .comment-content a:hover, .comment-awaiting-moderation a:hover, .widget a:hover {
+      border-bottom-color: #6a9cba;
+      color: #6a9cba; }
+    .cobalt-content a:focus, .entry-content a:focus, .entry-summary a:focus, .comment-content a:focus, .comment-awaiting-moderation a:focus, .widget a:focus {
+      border-bottom: none; }
+    .cobalt-content a[href$=jpeg], .entry-content a[href$=jpeg], .entry-summary a[href$=jpeg], .comment-content a[href$=jpeg], .comment-awaiting-moderation a[href$=jpeg], .widget a[href$=jpeg], .cobalt-content a[href$=jpg], .entry-content a[href$=jpg], .entry-summary a[href$=jpg], .comment-content a[href$=jpg], .comment-awaiting-moderation a[href$=jpg], .widget a[href$=jpg], .cobalt-content a[href$=jpe], .entry-content a[href$=jpe], .entry-summary a[href$=jpe], .comment-content a[href$=jpe], .comment-awaiting-moderation a[href$=jpe], .widget a[href$=jpe], .cobalt-content a[href$=png], .entry-content a[href$=png], .entry-summary a[href$=png], .comment-content a[href$=png], .comment-awaiting-moderation a[href$=png], .widget a[href$=png], .cobalt-content a[href$=gif], .entry-content a[href$=gif], .entry-summary a[href$=gif], .comment-content a[href$=gif], .comment-awaiting-moderation a[href$=gif], .widget a[href$=gif] {
+      border-bottom: none; }
+  .cobalt-content abbr, .entry-content abbr, .entry-summary abbr, .comment-content abbr, .comment-awaiting-moderation abbr, .widget abbr, .cobalt-content acronym, .entry-content acronym, .entry-summary acronym, .comment-content acronym, .comment-awaiting-moderation acronym, .widget acronym {
+    border-bottom: 1px dashed #6a9cba; }
+  .cobalt-content address, .entry-content address, .entry-summary address, .comment-content address, .comment-awaiting-moderation address, .widget address {
+    margin: 10px 0 25px 0; }
+  .cobalt-content big, .entry-content big, .entry-summary big, .comment-content big, .comment-awaiting-moderation big, .widget big {
+    font-size: 1.2em; }
+  .cobalt-content cite, .entry-content cite, .entry-summary cite, .comment-content cite, .comment-awaiting-moderation cite, .widget cite {
+    font-style: italic; }
+  .cobalt-content dl, .entry-content dl, .entry-summary dl, .comment-content dl, .comment-awaiting-moderation dl, .widget dl {
+    margin: 10px 0 25px 0; }
+    .cobalt-content dl dt, .entry-content dl dt, .entry-summary dl dt, .comment-content dl dt, .comment-awaiting-moderation dl dt, .widget dl dt {
+      border-top: 1px solid #375f78;
+      box-sizing: border-box;
+      clear: left;
+      float: left;
+      font-weight: bold;
+      margin: 0;
+      padding: 0.25em;
+      width: 30%; }
+    .cobalt-content dl dd, .entry-content dl dd, .entry-summary dl dd, .comment-content dl dd, .comment-awaiting-moderation dl dd, .widget dl dd {
+      border-top: 1px solid #375f78;
+      box-sizing: border-box;
+      float: left;
+      width: 70%;
+      padding: 0.25em; }
+  .cobalt-content sup, .entry-content sup, .entry-summary sup, .comment-content sup, .comment-awaiting-moderation sup, .widget sup {
+    vertical-align: super; }
+  .cobalt-content sub, .entry-content sub, .entry-summary sub, .comment-content sub, .comment-awaiting-moderation sub, .widget sub {
+    vertical-align: sub; }
+  .cobalt-content table, .entry-content table, .entry-summary table, .comment-content table, .comment-awaiting-moderation table, .widget table {
+    margin: 10px 0 25px 0; }
+    .cobalt-content table th, .entry-content table th, .entry-summary table th, .comment-content table th, .comment-awaiting-moderation table th, .widget table th, .cobalt-content table td, .entry-content table td, .entry-summary table td, .comment-content table td, .comment-awaiting-moderation table td, .widget table td {
+      border: 1px solid #121f27;
+      line-height: 1.2;
+      padding: 0.5em; }
+  .child-search .cobalt-content strong, .child-search .entry-content strong, .child-search .entry-summary strong, .child-search .comment-content strong, .child-search .comment-awaiting-moderation strong, .child-search .widget strong {
+    background: #447492; }
+  .cobalt-content .gallery-item a, .entry-content .gallery-item a, .entry-summary .gallery-item a, .comment-content .gallery-item a, .comment-awaiting-moderation .gallery-item a, .widget .gallery-item a {
+    border-bottom: none; }
+  .cobalt-content .gallery-item dd, .entry-content .gallery-item dd, .entry-summary .gallery-item dd, .comment-content .gallery-item dd, .comment-awaiting-moderation .gallery-item dd, .widget .gallery-item dd, .cobalt-content .gallery-item dt, .entry-content .gallery-item dt, .entry-summary .gallery-item dt, .comment-content .gallery-item dt, .comment-awaiting-moderation .gallery-item dt, .widget .gallery-item dt {
+    border-top: none;
+    float: none;
+    width: 100%; }
+
+html {
+  padding: 0 25px 25px 25px; }
 
 .site-header {
   background: #121f27;
@@ -677,142 +847,6 @@ a {
   max-width: 100%;
   height: auto; }
 
-.entry-content, .entry-summary, .comment-content, .comment-awaiting-moderation, .widget {
-  font: 400 1em/1.7 "Source Sans Pro", sans-serif; }
-  .entry-content p, .entry-summary p, .comment-content p, .comment-awaiting-moderation p, .widget p {
-    margin: 10px 0 25px 0; }
-  .entry-content code, .entry-summary code, .comment-content code, .comment-awaiting-moderation code, .widget code, .entry-content kbd, .entry-summary kbd, .comment-content kbd, .comment-awaiting-moderation kbd, .widget kbd, .entry-content pre, .entry-summary pre, .comment-content pre, .comment-awaiting-moderation pre, .widget pre, .entry-content tt, .entry-summary tt, .comment-content tt, .comment-awaiting-moderation tt, .widget tt {
-    background: #121f27;
-    font: 400 1em "Droid Sans Mono", monospace; }
-  .entry-content code, .entry-summary code, .comment-content code, .comment-awaiting-moderation code, .widget code {
-    padding: 0 0.2em; }
-  .entry-content pre, .entry-summary pre, .comment-content pre, .comment-awaiting-moderation pre, .widget pre {
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -ms-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -o-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    display: block;
-    padding: 1em;
-    margin: 10px 0 25px 0;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word; }
-  .entry-content blockquote, .entry-summary blockquote, .comment-content blockquote, .comment-awaiting-moderation blockquote, .widget blockquote {
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -ms-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    -o-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-    background: #121f27;
-    display: block;
-    font-style: italic;
-    margin: 10px 0 25px 0;
-    padding: 1em; }
-    .entry-content blockquote > *:first-child, .entry-summary blockquote > *:first-child, .comment-content blockquote > *:first-child, .comment-awaiting-moderation blockquote > *:first-child, .widget blockquote > *:first-child {
-      margin-top: 0.25rem; }
-    .entry-content blockquote > *:last-child, .entry-summary blockquote > *:last-child, .comment-content blockquote > *:last-child, .comment-awaiting-moderation blockquote > *:last-child, .widget blockquote > *:last-child {
-      margin-bottom: 0.5rem; }
-    .entry-content blockquote cite, .entry-summary blockquote cite, .comment-content blockquote cite, .comment-awaiting-moderation blockquote cite, .widget blockquote cite {
-      display: block;
-      text-align: right; }
-  .entry-content h1, .entry-summary h1, .comment-content h1, .comment-awaiting-moderation h1, .widget h1 {
-    font: 700 1.48em/1.6 Bitter, serif; }
-  .entry-content h2, .entry-summary h2, .comment-content h2, .comment-awaiting-moderation h2, .widget h2 {
-    font: 700 1.29em/1.6 Bitter, serif; }
-  .entry-content h3, .entry-summary h3, .comment-content h3, .comment-awaiting-moderation h3, .widget h3 {
-    font: 700 1.14em/1.85 Bitter, serif; }
-  .entry-content h4, .entry-summary h4, .comment-content h4, .comment-awaiting-moderation h4, .widget h4 {
-    font: 700 1em/1.85 Bitter, serif; }
-  .entry-content h5, .entry-summary h5, .comment-content h5, .comment-awaiting-moderation h5, .widget h5 {
-    font: 700 0.93em/1.85 Bitter, serif; }
-  .entry-content h6, .entry-summary h6, .comment-content h6, .comment-awaiting-moderation h6, .widget h6 {
-    font: 700 0.86em/1.85 Bitter, serif; }
-  .entry-content h2, .entry-summary h2, .comment-content h2, .comment-awaiting-moderation h2, .widget h2, .entry-content h3, .entry-summary h3, .comment-content h3, .comment-awaiting-moderation h3, .widget h3, .entry-content h4, .entry-summary h4, .comment-content h4, .comment-awaiting-moderation h4, .widget h4, .entry-content h5, .entry-summary h5, .comment-content h5, .comment-awaiting-moderation h5, .widget h5, .entry-content h6, .entry-summary h6, .comment-content h6, .comment-awaiting-moderation h6, .widget h6 {
-    margin: 1.3em 0 0.5em 0; }
-  .entry-content ol, .entry-summary ol, .comment-content ol, .comment-awaiting-moderation ol, .widget ol {
-    list-style: decimal outside; }
-  .entry-content ul, .entry-summary ul, .comment-content ul, .comment-awaiting-moderation ul, .widget ul {
-    list-style: disc outside; }
-  .entry-content ol, .entry-summary ol, .comment-content ol, .comment-awaiting-moderation ol, .widget ol, .entry-content ul, .entry-summary ul, .comment-content ul, .comment-awaiting-moderation ul, .widget ul {
-    margin: 0 0 1.71em;
-    line-height: 1.71; }
-    .entry-content ol ol, .entry-summary ol ol, .comment-content ol ol, .comment-awaiting-moderation ol ol, .widget ol ol, .entry-content ol ul, .entry-summary ol ul, .comment-content ol ul, .comment-awaiting-moderation ol ul, .widget ol ul, .entry-content ul ol, .entry-summary ul ol, .comment-content ul ol, .comment-awaiting-moderation ul ol, .widget ul ol, .entry-content ul ul, .entry-summary ul ul, .comment-content ul ul, .comment-awaiting-moderation ul ul, .widget ul ul {
-      margin-bottom: 0; }
-    .entry-content ol:last-child, .entry-summary ol:last-child, .comment-content ol:last-child, .comment-awaiting-moderation ol:last-child, .widget ol:last-child, .entry-content ul:last-child, .entry-summary ul:last-child, .comment-content ul:last-child, .comment-awaiting-moderation ul:last-child, .widget ul:last-child {
-      margin-bottom: 0; }
-  .entry-content > ol, .entry-summary > ol, .comment-content > ol, .comment-awaiting-moderation > ol, .widget > ol, .entry-content > ul, .entry-summary > ul, .comment-content > ul, .comment-awaiting-moderation > ul, .widget > ul {
-    margin: 10px 0 25px 0; }
-  .entry-content li, .entry-summary li, .comment-content li, .comment-awaiting-moderation li, .widget li {
-    margin: 0 0 0 2.57em; }
-  .entry-content img, .entry-summary img, .comment-content img, .comment-awaiting-moderation img, .widget img {
-    max-width: 100%;
-    height: auto; }
-    .entry-content img.alighcenter, .entry-summary img.alighcenter, .comment-content img.alighcenter, .comment-awaiting-moderation img.alighcenter, .widget img.alighcenter {
-      margin-left: auto;
-      margin-right: auto; }
-    .entry-content img.alignnone, .entry-summary img.alignnone, .comment-content img.alignnone, .comment-awaiting-moderation img.alignnone, .widget img.alignnone, .entry-content img.alignleft, .entry-summary img.alignleft, .comment-content img.alignleft, .comment-awaiting-moderation img.alignleft, .widget img.alignleft {
-      margin: 5px 20px 5px 0; }
-    .entry-content img.alignright, .entry-summary img.alignright, .comment-content img.alignright, .comment-awaiting-moderation img.alignright, .widget img.alignright {
-      margin: 5px 0 5px 20px; }
-  .entry-content img[style], .entry-summary img[style], .comment-content img[style], .comment-awaiting-moderation img[style], .widget img[style] {
-    max-width: 100%;
-    height: auto; }
-  .entry-content a, .entry-summary a, .comment-content a, .comment-awaiting-moderation a, .widget a {
-    border-bottom: 1px dashed #bbd1df;
-    color: #bbd1df;
-    text-decoration: none; }
-    .entry-content a:hover, .entry-summary a:hover, .comment-content a:hover, .comment-awaiting-moderation a:hover, .widget a:hover {
-      border-bottom-color: #6a9cba;
-      color: #6a9cba; }
-    .entry-content a:focus, .entry-summary a:focus, .comment-content a:focus, .comment-awaiting-moderation a:focus, .widget a:focus {
-      border-bottom: none; }
-    .entry-content a[href$=jpeg], .entry-summary a[href$=jpeg], .comment-content a[href$=jpeg], .comment-awaiting-moderation a[href$=jpeg], .widget a[href$=jpeg], .entry-content a[href$=jpg], .entry-summary a[href$=jpg], .comment-content a[href$=jpg], .comment-awaiting-moderation a[href$=jpg], .widget a[href$=jpg], .entry-content a[href$=jpe], .entry-summary a[href$=jpe], .comment-content a[href$=jpe], .comment-awaiting-moderation a[href$=jpe], .widget a[href$=jpe], .entry-content a[href$=png], .entry-summary a[href$=png], .comment-content a[href$=png], .comment-awaiting-moderation a[href$=png], .widget a[href$=png], .entry-content a[href$=gif], .entry-summary a[href$=gif], .comment-content a[href$=gif], .comment-awaiting-moderation a[href$=gif], .widget a[href$=gif] {
-      border-bottom: none; }
-  .entry-content abbr, .entry-summary abbr, .comment-content abbr, .comment-awaiting-moderation abbr, .widget abbr, .entry-content acronym, .entry-summary acronym, .comment-content acronym, .comment-awaiting-moderation acronym, .widget acronym {
-    border-bottom: 1px dashed #6a9cba; }
-  .entry-content address, .entry-summary address, .comment-content address, .comment-awaiting-moderation address, .widget address {
-    margin: 10px 0 25px 0; }
-  .entry-content big, .entry-summary big, .comment-content big, .comment-awaiting-moderation big, .widget big {
-    font-size: 1.2em; }
-  .entry-content cite, .entry-summary cite, .comment-content cite, .comment-awaiting-moderation cite, .widget cite {
-    font-style: italic; }
-  .entry-content dl, .entry-summary dl, .comment-content dl, .comment-awaiting-moderation dl, .widget dl {
-    margin: 10px 0 25px 0; }
-    .entry-content dl dt, .entry-summary dl dt, .comment-content dl dt, .comment-awaiting-moderation dl dt, .widget dl dt {
-      border-top: 1px solid #375f78;
-      box-sizing: border-box;
-      clear: left;
-      float: left;
-      font-weight: bold;
-      margin: 0;
-      padding: 0.25em;
-      width: 30%; }
-    .entry-content dl dd, .entry-summary dl dd, .comment-content dl dd, .comment-awaiting-moderation dl dd, .widget dl dd {
-      border-top: 1px solid #375f78;
-      box-sizing: border-box;
-      float: left;
-      width: 70%;
-      padding: 0.25em; }
-  .entry-content sup, .entry-summary sup, .comment-content sup, .comment-awaiting-moderation sup, .widget sup {
-    vertical-align: super; }
-  .entry-content sub, .entry-summary sub, .comment-content sub, .comment-awaiting-moderation sub, .widget sub {
-    vertical-align: sub; }
-  .entry-content table, .entry-summary table, .comment-content table, .comment-awaiting-moderation table, .widget table {
-    margin: 10px 0 25px 0; }
-    .entry-content table th, .entry-summary table th, .comment-content table th, .comment-awaiting-moderation table th, .widget table th, .entry-content table td, .entry-summary table td, .comment-content table td, .comment-awaiting-moderation table td, .widget table td {
-      border: 1px solid #121f27;
-      line-height: 1.2;
-      padding: 0.5em; }
-  .child-search .entry-content strong, .child-search .entry-summary strong, .child-search .comment-content strong, .child-search .comment-awaiting-moderation strong, .child-search .widget strong {
-    background: #447492; }
-  .entry-content .gallery-item a, .entry-summary .gallery-item a, .comment-content .gallery-item a, .comment-awaiting-moderation .gallery-item a, .widget .gallery-item a {
-    border-bottom: none; }
-  .entry-content .gallery-item dd, .entry-summary .gallery-item dd, .comment-content .gallery-item dd, .comment-awaiting-moderation .gallery-item dd, .widget .gallery-item dd, .entry-content .gallery-item dt, .entry-summary .gallery-item dt, .comment-content .gallery-item dt, .comment-awaiting-moderation .gallery-item dt, .widget .gallery-item dt {
-    border-top: none; }
-
 .page-links, .comments-page-links {
   margin: 10px 0 25px 0; }
   .page-links a, .comments-page-links a {
@@ -940,7 +974,7 @@ li.pingback, li.trackback {
 .comment-reply {
   float: right; }
 
-.comment-post-author {
+.bypostauthor {
   border-left: 1px solid white;
   color: white;
   font-size: 0.5em;

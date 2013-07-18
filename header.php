@@ -16,7 +16,7 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		<meta name="description" content="<?php bloginfo('description'); ?>" />
 		<?php wp_head(); ?>
 	</head>
-	<body>
+		<body <?php body_class(); ?>>
 		<div id="page" class="hfeed site">
 			<header class="site-header <?php if (!is_home() || $paged > 1) { ?>site-header-small<?php } ?>" role="banner">
 			<?php if ($header_image = get_header_image()) { ?><div class="site-logo"><img class="site-logo-icon" src="<?php echo $header_image; ?>" title="<?php bloginfo('name'); ?>" alt="<?php bloginfo('name'); ?>" /></div><?php } ?>

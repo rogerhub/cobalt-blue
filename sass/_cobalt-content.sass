@@ -1,0 +1,139 @@
+// Extend this class
+.cobalt-content
+  @extend .after-clear-fix
+  font: 400 1em/1.7 $sans-serif
+  p
+    margin: 10px 0 25px 0
+  code,kbd,pre,tt
+    background: $blue1
+    font: 400 1em $mono
+  code
+    padding: 0 0.2em
+  pre
+    +vendor-prefix(box-shadow, inset 0 0 15px rgba(0,0,0,0.4))
+    display: block
+    padding: 1em
+    margin: 10px 0 25px 0
+    // http://justcramer.com/2008/03/12/word-wrap-preformatted-text/
+    white-space: pre-wrap
+    white-space: -moz-pre-wrap
+    white-space: -pre-wrap
+    white-space: -o-pre-wrap
+    word-wrap: break-word
+  blockquote
+    +vendor-prefix(box-shadow, inset 0 0 15px rgba(0,0,0,0.4))
+    background: $blue1
+    display: block
+    font-style: italic
+    margin: 10px 0 25px 0
+    padding: 1em
+    & > *:first-child
+      margin-top: 0.25rem
+    & > *:last-child
+      // Reduced margin for last paragraph of a blockquote
+      margin-bottom: 0.5rem
+    cite
+      display: block
+      text-align: right
+  h1
+    font: 700 1.48em/1.6 $serif
+  h2
+    font: 700 1.29em/1.6 $serif
+  h3
+    font: 700 1.14em/1.85 $serif
+  h4
+    font: 700 1em/1.85 $serif
+  h5
+    font: 700 0.93em/1.85 $serif
+  h6
+    font: 700 0.86em/1.85 $serif
+  h2,h3,h4,h5,h6
+    margin: 1.3em 0 0.5em 0
+  ol
+    list-style: decimal outside
+  ul
+    list-style: disc outside
+  ol, ul
+    margin: 0 0 1.71em
+    line-height: 1.71
+    ol, ul
+      margin-bottom: 0
+    &:last-child
+      margin-bottom: 0
+  & > ol, & > ul
+    margin: 10px 0 25px 0
+  li
+    margin: 0 0 0 2.57em
+  img
+    max-width: 100%
+    height: auto
+    &.alighcenter
+      margin-left: auto
+      margin-right: auto
+    &.alignnone, &.alignleft
+      margin: $shifted_spacing $base_spacing $shifted_spacing 0
+    &.alignright
+      margin: $shifted_spacing 0 $shifted_spacing $base_spacing
+  img[style]
+    max-width: 100%
+    height: auto
+  a
+    border-bottom: 1px dashed $blue9
+    color: $blue9
+    text-decoration: none
+    &:hover
+      border-bottom-color: $blue6
+      color: $blue6
+    &:focus
+      border-bottom: none
+    &[href$=jpeg],
+    &[href$=jpg],
+    &[href$=jpe],
+    &[href$=png],
+    &[href$=gif]
+      border-bottom: none
+  abbr, acronym
+    border-bottom: 1px dashed $blue6
+  address
+    margin: 10px 0 25px 0
+  big
+    font-size: 1.2em
+  cite
+    font-style: italic
+  dl
+    margin: 10px 0 25px 0
+    dt
+      border-top: 1px solid $blue3
+      box-sizing: border-box
+      clear: left
+      float: left
+      font-weight: bold
+      margin: 0
+      padding: 0.25em
+      width: 30%
+    dd
+      border-top: 1px solid $blue3
+      box-sizing: border-box
+      float: left
+      width: 70%
+      padding: 0.25em
+    @extend .after-clear-fix
+  sup
+    vertical-align: super
+  sub
+    vertical-align: sub
+  table
+    margin: 10px 0 25px 0
+    th,td
+      border: 1px solid $blue1
+      line-height: 1.2
+      padding: 0.5em
+  .child-search & strong
+    background: $blue4
+  .gallery-item
+    a
+      border-bottom: none
+    dd,dt
+      border-top: none
+      float: none
+      width: 100%

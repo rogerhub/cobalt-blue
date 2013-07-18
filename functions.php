@@ -11,6 +11,11 @@
  */
 
 /**
+ * Sets the content width for this theme. This value is mostly irrelevant because CSS takes care of the rest.
+ */
+if (!isset($content_width)) $content_width = 900;
+
+/**
  * Registers theme support abilities
  */
 function cobalt_after_theme_setup() {
@@ -28,6 +33,8 @@ add_action('after_setup_theme', 'cobalt_after_theme_setup');
 function cobalt_init() {
 	wp_register_style('cobalt-google-font', 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Droid+Sans+Mono|Bitter:400,700&subset=latin,latin-ext');
 	wp_register_style('cobalt-theme', get_stylesheet_uri(), array('cobalt-google-font'), filemtime(get_template_directory() . '/style.css'));
+	wp_enqueue_script('comment-reply');
+	add_editor_style();
 }
 add_action('init', 'cobalt_init');
 
@@ -157,7 +164,7 @@ function cobalt_comment($comment, $args, $depth) {
 			<header class="comment-meta comment-author vcard">
 				<?php echo get_avatar( $comment, 40); ?>
 				<?php printf('<cite class="fn comment-author">%1$s%2$s</cite>', get_comment_author_link(), 
-				( $comment->user_id === $post->post_author ) ? '<span class="comment-post-author"> ' . __( 'Post author', 'cobalt' ) . '</span>' : '' ); ?>
+				( $comment->user_id === $post->post_author ) ? '<span class="bypostauthor"> ' . __( 'Post author', 'cobalt' ) . '</span>' : '' ); ?>
 				<?php printf('<a href="%1$s"><time datetime="%2$s" class="comment-time">%3$s</time></a>',
 					esc_url( get_comment_link( $comment->comment_ID ) ),
 					get_comment_time( 'c' ),

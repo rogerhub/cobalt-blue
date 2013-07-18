@@ -5,20 +5,7 @@ Cobalt Blue is a general-purpose, full-width, responsive, hi-DPI-ready, HTML5 Wo
 
 The theme is blue, as you can guess from its name. The exact shades of blue used follow a mathematically consistent pattern from black to blue to white:
 
- 1. #000000 (black)
- 1. #121f27
- 1. #1e3442
- 1. #2b4a5d
- 1. #375f78
- 1. #447492
- 1. #508aad
- 1. #6a9cba
- 1. #85aec7
- 1. #a0c0d3
- 1. #bbd1df
- 1. #d5e3ec
- 1. #f0f5f8
- 1. #ffffff (white)
+![A picture showing all the blue colors.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-1.png)
 
 If you are not fond of the color blue, maybe the demo will change your mind.
 
@@ -35,6 +22,48 @@ Installation
  - Download the latest version of the theme at [github.com/rogerhub/cobalt-blue-wordpress/archive/master.zip](https://github.com/rogerhub/cobalt-blue-wordpress/archive/master.zip).
  - Unzip it to your WordPress directory at `wp-content/themes/`.
  - Log in to WordPress as the administrator and activate the theme under Appearance > Theme.
+
+Screenshots
+-----------
+
+There are a lot of these, so hang tight.
+
+![Some pictures of water and bridges with a sidebar on the right.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-1.png)
+
+This photo layout was created using the built-in [WordPress Gallery feature](http://codex.wordpress.org/The_WordPress_Gallery). This example is laid out in a 3-column grid.
+
+![Two blockquotes in a dark blue area and a table.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-3.png)
+
+All types of producible HTML tags and WordPress CSS classes have been styled elegantly. This theme puts a special focus on `pre` and `blockquote` tags, which can be used to display code for a programming blog (like I usually do) or a quote. You can also see some sidebar widgets on the right.
+
+![A picture of wood up close with a caption.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-4.png)
+
+WordPress 3.6 was supposed to have post formats, but they have delayed this feature. Cobalt WordPress Theme will support post formats once they are officially released. Here is an example of how an image post would look. It has a caption.
+
+![Some comments organized in 3 levels.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-5.png)
+
+The built-in comments are pretty good. (The contrived comments shown here don't do them justice..) They support the built-in WordPress JavaScript comment reply system.
+
+![The response form.](https://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-6.5.png)
+
+This is the response form for the built-in comments system.
+
+![More example of comments. These are from Disqus.](http://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-6.png)
+
+Cobalt Blue was optimized for use with Disqus. This theme will integrate flawlessly with Disqus, both technically and aesthetically. As you can see above, the native Disqus separator lines and the Cobalt Blue separator lines are of the same style. (The built-in comments still work great though.)
+
+![A more button inside a nice round circle.](https://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-7.png)
+
+The sexiest "More" button yet. The design on this navigation element was inspired by the upcoming Twenty Thirteen Official WordPress default theme. You really have to [try clicking it](http://code.rogerhub.com/) to get a feel for its true elegance.
+
+![The editor in WordPress.](https://code.rogerhub.com/wp-content/uploads/sites/6/2013/07/cobalt-preview-8.png)
+
+A complete editor style for the built-in editor that mimics the styles from the theme. (In fact, the CSS rules come from the exact same SASS code.) You can now see what the result will look like as you're editing. (And it sure beats the default WordPress editor styles.)
+
+License
+-------
+
+Cobalt Blue WordPress Theme, Copyright 2013 RogerHub. Cobalt Blue is distributed under the terms of the GNU GPL v2. 
 
 Support
 -------

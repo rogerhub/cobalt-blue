@@ -6,7 +6,7 @@
  */
 
 ?>
-<form role='search' method='get' id='searchform' action='<?php bloginfo('url'); ?>'>
+<form role='search' method='get' id='searchform' action='<?php echo home_url(); ?>'>
 	<div>
 		<label class="screen-reader-text" for="s">Search for:</label>
 		<input type="text" class="text widget-search-bar" value="" name="s" id="s" placeholder="Search" />
