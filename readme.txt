@@ -31,6 +31,9 @@ Cobalt Blue WordPress Theme, Copyright 2013 RogerHub. Cobalt Blue is distributed
 Until the theme gets accepted on the WordPress Theme Repository, you can contact me by opening an issue on GitHub. (rogerhub/cobalt-blue-wordpress)
 
 ###### Changelog ######
+= 1.7 =
+* Fixed bug: Category archives did not display navigation
+
 = 1.6 =
 * Added genericons license
 * Added tag and author archive support
