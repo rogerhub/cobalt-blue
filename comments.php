@@ -26,5 +26,11 @@ if (post_password_required()) {
 	</div>
 	<?php endif; ?>
 	<?php endif; ?>
-	<?php comment_form(); ?>
+	<?php if (comments_open()) : ?>
+		<?php comment_form(); ?>
+	<?php else: ?>
+	<div class="respond">
+		<h3 class="reply-title"><?php _e('Comments are closed.', 'cobalt'); ?></h2>
+	</div>
+	<?php endif; ?>
 </div>

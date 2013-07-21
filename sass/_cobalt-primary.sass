@@ -139,7 +139,7 @@
   font: 700 1.14em/1.85 $serif
 .commentlist
   border-bottom: $line
-  margin: ($base_spacing + $shifted_spacing) 0 $shifted_spacing 0
+  margin: ($base_spacing + $shifted_spacing) 0 ($base_spacing + $shifted_spacing) 0
 li.comment
   @extend .post
   @extend .after-clear-fix
@@ -218,7 +218,7 @@ li.pingback, li.trackback
 #respond
   @extend .post
   padding: 0 0 ($base_spacing + $shifted_spacing) 0
-  h3
+  h3, .reply-title
     @extend .comments-title
   p
     padding: $shifted_spacing 0 $base_spacing 0
