@@ -28,20 +28,14 @@ function cobalt_after_theme_setup() {
 add_action('after_setup_theme', 'cobalt_after_theme_setup');
 
 /**
- * Registers important hooks at wp_init
- */
-function cobalt_init() {
-	wp_register_style('cobalt-google-font', 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Droid+Sans+Mono|Bitter:400,700&subset=latin,latin-ext');
-	wp_register_style('cobalt-theme', get_stylesheet_uri(), array('cobalt-google-font'), filemtime(get_template_directory() . '/style.css'));
-	wp_enqueue_script('comment-reply');
-	add_editor_style();
-}
-add_action('init', 'cobalt_init');
-
-/**
  * Enqueues required stylesheets and javascript
  */
 function cobalt_wp_enqueue_script() {
+	wp_register_style('cobalt-google-font', '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Droid+Sans+Mono|Bitter:400,700&subset=latin,latin-ext');
+	wp_register_style('cobalt-theme', get_stylesheet_uri(), array('cobalt-google-font'), filemtime(get_template_directory() . '/style.css'));
+	wp_enqueue_script('comment-reply');
+	add_editor_style();
+
 	if (!is_admin()) {
 		wp_enqueue_style('cobalt-theme');
 	}
@@ -65,6 +59,29 @@ function cobalt_widgets_init() {
 add_action('widgets_init', 'cobalt_widgets_init');
 
 /**
+ * Creates a nicely formatted title element text
+ */
+function cobalt_wp_title($title, $sep) {
+	global $paged, $page;
+
+	if (is_feed()) {
+		return $title;
+	}
+
+	$title .= get_bloginfo('name');
+	if (($site_description = get_bloginfo('description', 'display')) && (is_home() || is_front_page())) {
+			$title .= " $sep $site_description";
+	}
+
+	if ($paged >= 2 || $page >= 2) {
+		$title .= " $sep " . sprintf(__('Page %s', 'cobalt'), max($paged, $page));
+	}
+
+	return $title;
+}
+add_filter('wp_title', 'cobalt_wp_title', 10, 2);
+
+/**
  * Section
  * View helpers
  */
@@ -77,14 +94,14 @@ function cobalt_entry_meta() {
 	$categories = get_the_category_list(__(', ', 'cobalt'));
 	$tags = get_the_tag_list('', __(', ', 'cobalt'));
 
-	printf('<span class="date"><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a></span>', esc_attr(get_permalink()), esc_attr(get_the_time()), esc_attr(get_the_time('c')), esc_html(get_the_date()));
+	printf('<span class="date-link"><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a></span>', esc_attr(get_permalink()), esc_attr(get_the_time()), esc_attr(get_the_time('c')), esc_html(get_the_date()));
 	if ($categories) {
 		printf('<span class="category-links">%s</span>', $categories);
 	}
 	if ($tags) {
 		printf('<span class="tags-links">%s</span>', $tags);
 	}
-	printf('<span class="author vcard"><a href="%1$s" title="%2$s" rel="author">%3$s</a></span>', esc_attr(get_author_posts_url(get_the_author_meta('ID'))), esc_attr(sprintf(__('View all posts by %s', 'cobalt'), get_the_author())), esc_html(get_the_author()));
+	printf('<span class="author-link vcard"><a href="%1$s" title="%2$s" rel="author">%3$s</a></span>', esc_attr(get_author_posts_url(get_the_author_meta('ID'))), esc_attr(sprintf(__('View all posts by %s', 'cobalt'), get_the_author())), esc_html(get_the_author()));
 }
 /**
  * Prints out older/newer navigation in The Loop
@@ -116,16 +133,14 @@ function cobalt_content_page() {
  */
 function cobalt_colophon() {
 	echo '<footer id="colophon" role="contentinfo"><div class="site-info">';
-	printf('%1$s<a href="%2$s" title="%3$s">%4$s</a> %5$s %6$s <a href="%7$s" title="%8$s">%9$s</a>%10$s',
+	printf('%1$s<a href="%2$s" title="%3$s">%4$s</a> %5$s <a href="%6$s">%7$s</a>%8$s',
 		esc_html(__("Proudly powered by ", 'cobalt')),
 		esc_attr(__('http://wordpress.org/', 'cobalt')),
 		esc_attr(__('Semantic Personal Publishing Platform', 'cobalt')),
 		esc_html(__("WordPress", 'cobalt')),
 		esc_html(__("with the", 'cobalt')),
-		esc_html(__("Cobalt Blue WordPress Theme by", 'cobalt')),
 		esc_attr(__('http://code.rogerhub.com', 'cobalt')),
-		esc_attr(__('The Development Blog at RogerHub', 'cobalt')),
-		esc_html(__('RogerHub', 'cobalt')),
+		esc_html(__('Cobalt Blue Theme', 'cobalt')),
 		esc_html(_x('.', 'Period after footer', 'cobalt'))
 	);
 	echo '</div></footer>';
@@ -134,12 +149,15 @@ function cobalt_colophon() {
  * Prints out the title of the archive
  */
 function cobalt_archive_title() {
+	// Note: Author case is handled by author.php
 	if (is_day()) {
 		printf(__('Daily Archives: <span>%s</span>', 'cobalt'), get_the_date());
 	} else if (is_month()) {
 		printf(__('Monthly Archives: <span>%s</span>', 'cobalt'), get_the_date('F Y'));
 	} else if (is_year()) {
 		printf(__('Yearly Archives: <span>%s</span>', 'cobalt'), get_the_date('Y'));
+	} else if (is_tag()) {
+		printf(__('Posts Tagged: <span>%s</span>', 'cobalt'), single_tag_title('', false));
 	} else {
 		printf(__('Blog Archives', 'cobalt'));
 	}
