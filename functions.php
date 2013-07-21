@@ -116,15 +116,16 @@ function cobalt_content_page() {
  */
 function cobalt_colophon() {
 	echo '<footer id="colophon" role="contentinfo"><div class="site-info">';
-	printf('%1$s<a href="%2$s" title="%3$s">%4$s</a>%5$s<a href="%6$s" title="%7$s">%8$s</a>%9$s',
+	printf('%1$s<a href="%2$s" title="%3$s">%4$s</a> %5$s %6$s <a href="%7$s" title="%8$s">%9$s</a>%10$s',
 		esc_html(__("Proudly powered by ", 'cobalt')),
 		esc_attr(__('http://wordpress.org/', 'cobalt')),
 		esc_attr(__('Semantic Personal Publishing Platform', 'cobalt')),
 		esc_html(__("WordPress", 'cobalt')),
-		esc_html(__(" with the ", 'cobalt')),
-		esc_attr(__('https://github.com/rogerhub/cobalt-blue-wordpress', 'cobalt')),
-		esc_attr(__('Get the Cobalt Blue WordPress Theme', 'cobalt')),
-		esc_html(__('Cobalt Blue WordPress Theme by RogerHub', 'cobalt')),
+		esc_html(__("with the", 'cobalt')),
+		esc_html(__("Cobalt Blue WordPress Theme by", 'cobalt')),
+		esc_attr(__('http://code.rogerhub.com', 'cobalt')),
+		esc_attr(__('The Development Blog at RogerHub', 'cobalt')),
+		esc_html(__('RogerHub', 'cobalt')),
 		esc_html(_x('.', 'Period after footer', 'cobalt'))
 	);
 	echo '</div></footer>';
