@@ -48,7 +48,7 @@ add_action('wp_enqueue_scripts', 'cobalt_wp_enqueue_script');
 function cobalt_widgets_init() {
 	register_sidebar(array(
 		'name' => __('Main Sidebar', 'cobalt'),
-		'id' => 'main-sidebar',
+		'id' => 'sidebar-1',
 		'description' => __('Appears on the right side of all posts and pages.', 'cobalt'),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
