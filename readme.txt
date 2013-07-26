@@ -31,6 +31,9 @@ Cobalt Blue WordPress Theme, Copyright 2013 RogerHub. Cobalt Blue is distributed
 Until the theme gets accepted on the WordPress Theme Repository, you can contact me by opening an issue on GitHub. (rogerhub/cobalt-blue-wordpress)
 
 ###### Changelog ######
+= 1.11 =
+* Fixed bug: Editor style was not being loaded
+
 = 1.10 =
 * Changed name of sidebar from main-sidebar to sidebar-1 (for WordPress.org Theme Previews)
 
