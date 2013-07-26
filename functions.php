@@ -24,6 +24,7 @@ function cobalt_after_theme_setup() {
 	add_theme_support('post-formats', array('audio',));
 	add_theme_support('post-thumbnails');
 	register_nav_menu('primary', 'The primary header navigation menu');
+	add_editor_style();
 }
 add_action('after_setup_theme', 'cobalt_after_theme_setup');
 
@@ -34,7 +35,6 @@ function cobalt_wp_enqueue_script() {
 	wp_register_style('cobalt-google-font', '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Droid+Sans+Mono|Bitter:400,700&subset=latin,latin-ext');
 	wp_register_style('cobalt-theme', get_stylesheet_uri(), array('cobalt-google-font'), filemtime(get_template_directory() . '/style.css'));
 	wp_enqueue_script('comment-reply');
-	add_editor_style();
 
 	if (!is_admin()) {
 		wp_enqueue_style('cobalt-theme');
